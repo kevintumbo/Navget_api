@@ -35,8 +35,13 @@ export SECRET="some-random-stuff-the-more-complicated-the-better"
 export APP_SETTINGS="development"
 
 ```
-
 #### Setting up the Database and Migrations
+
+---
+
+create 2 postgresql databases 
+* one for testing
+* one for development
 
 ---
 
