@@ -1,28 +1,29 @@
 import json
-from tests.base_test import BaseTestCase
+from .base_test import BaseTestCase
 
 register_url = '/navyget-api/v1/auth/register'
 login_url = '/navyget-api/v1/auth/login'
 
-class TestAuthentication(BaseTestCase):
-    """ Success and Fail Tests for user auhentication log in and logout """
 
-    def test_succesfull_user_registration(self):
+class TestAuthentication(BaseTestCase):
+    """ Success and Fail Tests for user authentication log in and logout """
+
+    def test_successful_user_registration(self):
         """
-        succesfully creates user
+        successfully creates user
         (Post request)
         """
 
         self.data = {
-            "first_name" : "kyle",
-            "last_name" : "walker",
-            "username" : "kyliewalker",
-            "email" : "kylie@gmail.com",
-            "password" : "password1234"
+            "first_name": "kyle",
+            "last_name": "walker",
+            "username": "kyliewalker",
+            "email": "kylie@gmail.com",
+            "password": "password1234"
         }
 
-        # make a post request and recieve a success response
-        response = self.client.post(register_url, data=json.dumps(self.data), headers={"Content-Type":"application/json"})
+        # make a post request and receive a success response
+        response = self.client.post(register_url, data=json.dumps(self.data), headers={"Content-Type": "application/json"})
         self.assertEqual(response.status, "201 CREATED")
         self.assertIn("Success. You have registered. You can Log in", str(response.data))
 
@@ -126,20 +127,19 @@ class TestAuthentication(BaseTestCase):
         (Post Request)
         """
         # create initial user
-        response = self.client.post(register_url, data=json.dumps(self.user_zero), headers={"Content-Type":"application/json"})
+        response = self.client.post(register_url, data=json.dumps(self.user_zero), headers={"Content-Type": "application/json"})
 
-        #create new user with duplicate username
-        header={ "Content-Type": "application/json"}
+        # create new user with duplicate username
         self.data = {
             "first_name" : "Paul",
             "last_name" : "Pogba",
-            "username" : "kung-fukenny",
+            "username" : "kungfukenny",
             "email" : "paulie_pogba@gmail.com",
             "password" : "password1234"
         }
 
         # make a post request and recieve a failure response
-        response = self.client.post(register_url, data=json.dumps(self.data), headers={"Content-Type":"application/json"})
+        response = self.client.post(register_url, data=json.dumps(self.data), headers={"Content-Type": "application/json"})
         self.assertEqual(response.status, "409 CONFLICT")
         self.assertIn("Error. Username Already Exists", str(response.data))
 

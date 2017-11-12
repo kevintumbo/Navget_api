@@ -2,7 +2,7 @@ import re
 from flask import Flask, Blueprint
 from flask_restful import Resource, Api, reqparse
 from . import auth_blueprint
-from app.models import User
+from ..models import User
 
 api_auth = Api(auth_blueprint)
 
@@ -32,14 +32,14 @@ class Registration(Resource):
                 'message': 'Error. Missing First Name'
                 }
 
-            return (response, 400)
+            return response, 400
         check_firstname = re.match('^[a-zA-Z]+$', firstname)
         if check_firstname is None:
             response = {
                 'message': 'Error. First Name Has Invalid Characters'
             }
             # return a response notifying the user that credentials username is invalid
-            return (response, 400)
+            return response, 400
 
         # confirm last name value exists and is valid format
         lastname = args['last_name']
@@ -48,7 +48,7 @@ class Registration(Resource):
                 'message': 'Error. Missing Last Name'
             }
 
-            return (response, 400)
+            return response, 400
 
         check_lastname = re.match('^[a-zA-Z]+$', lastname)
         if check_lastname is None:
@@ -65,7 +65,7 @@ class Registration(Resource):
                 'message': 'Error. Missing Username'
             }
 
-            return (response, 400)
+            return response, 400
 
         check_username = re.match('^[a-zA-Z0-9_.-]+$', username)
         if check_username is None:
@@ -73,7 +73,7 @@ class Registration(Resource):
                 'message': 'Error. Username Has Invalid Characters'
             }
             # return a response notifying the user that credentials username is invalid
-            return (response, 400)
+            return response, 400
 
         # confirm email value exists and is valid format
         email = args['email']
@@ -82,7 +82,7 @@ class Registration(Resource):
                 'message': 'Error. Missing Email'
             }
 
-            return (response, 400)
+            return response, 400
         match = re.match('^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$', email)
 
         if match is None:
@@ -90,7 +90,7 @@ class Registration(Resource):
                 'message': 'Error. Invalid Email Format'
             }
             
-            return (response, 400)
+            return response, 400
 
         # confirm password value exists and is valid format
         password = args['password']
@@ -99,7 +99,7 @@ class Registration(Resource):
                 'message': 'Error. Missing Password'
             }
 
-            return (response, 400)
+            return response, 400
 
         # Query to see if the username or email already exists
         username = User.query.filter_by(username=args["username"]).first()
@@ -122,28 +122,28 @@ class Registration(Resource):
                     'message': 'Success. You have registered. You can Log in'
                 }
 
-                return (response, 201)
+                return response, 201
             except Exception as e:
                 # An error has occured, therefore return a string message containing the error
                 response = {
                     'status': 'error',
                     'message': str(e)
                 }
-                return (response, 500)
+                return response, 500
 
         elif username:
             response = {
                 'message': 'Error. Username Already Exists'
                 }
 
-            return (response, 409)
+            return response, 409
 
         else:
             response = {
                 'message': 'Error. Email Address Already Exists'
                 }
 
-            return (response, 409)
+            return response, 409
 
   
 class Login(Resource):
@@ -168,7 +168,7 @@ class Login(Resource):
                 'message': 'Error: Missing Valid Email Address'
             }
 
-            return (response, 400)
+            return response, 400
         match = re.match('^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$', email)
 
         if match is None:
@@ -176,7 +176,7 @@ class Login(Resource):
                 'message': 'Error. Invalid Email Format'
             }
             
-            return (response, 400)
+            return response, 400
 
         # confirm password value exists and is valid format
         password = args['password']
@@ -185,34 +185,36 @@ class Login(Resource):
                 'message': 'Error: Missing Password'
             }
 
-            return (response, 400)
+            return response, 400
 
         try:
             user = User.query.filter_by(email=args["email"]).first()
 
             if user and user.password_is_valid(password=args["password"]):
-                access_token = user.generate_token(user.id)
+                access_token = user.generate_auth_token()
                 if access_token:
                     response = {
                         'message': 'You have succesfully logged in. Welcome',
                         'access_token': access_token.decode()
                     }
-                    return (response, 200)
+                    return response, 200
             else:
                 response = {
                     'message': 'Error: Invalid Email or Password'
                 }
-                return (response, 400)
+                return response, 400
 
         except Exception as e:
             response = {
                     'status': 'error',
                     'message': str(e)
                 }
-            return (response, 500)
+            return response, 500
 
 # make resource accessible to the system
 # http://127.0.0.1:5000/navyget-api/v1/auth/register
 # http://127.0.0.1:5000/navyget-api/v1/auth/login
+
+
 api_auth.add_resource(Registration, '/navyget-api/v1/auth/register')
 api_auth.add_resource(Login, '/navyget-api/v1/auth/login')
