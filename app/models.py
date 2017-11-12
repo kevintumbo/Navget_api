@@ -3,6 +3,7 @@ from datetime import timedelta
 from app import db
 from flask import current_app
 from flask_bcrypt import Bcrypt
+from itsdangerous import (TimedJSONWebSignatureSerializer as Serializer, BadSignature, SignatureExpired)
 import jwt
 
 
@@ -36,54 +37,12 @@ class User(db.Model):
         self.email = email
         self.password = Bcrypt().generate_password_hash(password).decode()
 
-    def password_is_valid(self, password):
-        """
-        Checks the password against it's hash to validates the user's password
-        """
-
-        return Bcrypt().check_password_hash(self.password, password)
-
     def __repr__(self):
         return "{}, {}, {}".format(
             self.first_name,
             self.last_name,
             self.last_login
         )
-    def generate_token(self, id):
-        """ Generates the access token"""
-
-        try:
-            # set up a payload with an expiration time
-            payload = {
-                'exp': datetime.datetime.utcnow()+ timedelta(minutes=30),
-                'iat': datetime.datetime.utcnow(),
-                'sub': id
-            }
-            # create the byte string token using the payload and the SECRET key
-            jwt_string = jwt.encode(
-                payload,
-                current_app.config.get('SECRET'),
-                algorithm='HS256'
-            )
-            return jwt_string
-
-        except Exception as e:
-            # return an error in string format if an exception occurs
-            return str(e)
-
-    @staticmethod
-    def decode_token(token):
-        """Decodes the access token from the Authorization header."""
-        try:
-            # try to decode the token using our SECRET variable
-            payload = jwt.decode(token, current_app.config.get('SECRET'))
-            return payload['sub']
-        except jwt.ExpiredSignatureError:
-            # the token is expired, return an error string
-            return "Expired token. Please login to get a new token"
-        except jwt.InvalidTokenError:
-            # the token is invalid, return an error string
-            return "Invalid token. Please register or login"
 
     def save(self):
         """ add new user to database"""
@@ -96,6 +55,40 @@ class User(db.Model):
 
         db.session.delete(self)
         db.session.commit()
+
+    def password_is_valid(self, password):
+        """
+        Checks the password against it's hash to validates the user's password
+        """
+
+        return Bcrypt().check_password_hash(self.password, password)
+
+    def generate_auth_token(self, expiration=600):
+        """
+        generate a token for authentication
+        :param expiration:
+        :return: token
+        """
+        token = Serializer(current_app.config.get('SECRET'), expires_in=expiration)
+        return token.dumps({'id': self.id})
+
+    @staticmethod
+    def verify_auth_token(token):
+        """
+        used to decode token and verify a user
+        :param token:
+        :return:
+        """
+        deserializer = Serializer(current_app.config.get('SECRET'))
+        try:
+            data = deserializer.loads(token)
+        except SignatureExpired:
+            return None  # valid token, but expired
+        except BadSignature:
+            return None  # invalid token
+        user = User.query.get(data['id'])
+        return user
+
 
 class Shops(db.Model):
     """ creates a new shop in the database """
@@ -110,19 +103,23 @@ class Shops(db.Model):
     town_city = db.Column(db.String(30), nullable=True)
     physical_address = db.Column(db.String(100), nullable=True)
     date_created = db.Column(db.DateTime, default=datetime.datetime.utcnow)
-    date_updated = db.Column(db.DateTime, default=datetime.datetime.utcnow,
+    date_modified = db.Column(db.DateTime, default=datetime.datetime.utcnow,
                              onupdate=datetime.datetime.utcnow)
     items = db.relationship('Items', backref='shops', lazy='dynamic', cascade='delete')
     services = db.relationship('Services', backref='shops', lazy='dynamic', cascade='delete')
     owner_id = db.Column(db.Integer, db.ForeignKey('users.id'))
 
     def __repr__(self):
-        return "{}, {}, {}, {}, {}".format(
+        return "{}, {}, {}, {}, {}, {}, {} ,{} ".format(
+            self.id,
             self.shop_name,
             self.shop_type,
             self.shop_category,
-            self.date_created,
-            self.date_modifed
+            self.physical_address,
+            self.town_city,
+            self.county,
+            self.country,
+
         )
  
     @staticmethod
