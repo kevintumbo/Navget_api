@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/kevintumbo/Navget_api.svg?branch=develop)](https://travis-ci.org/kevintumbo/Navget_api)
+[![Coverage Status](https://coveralls.io/repos/github/kevintumbo/Navget_api/badge.svg?branch=ch-set-up-travis-ci-and-coveralls)](https://coveralls.io/github/kevintumbo/Navget_api?branch=ch-set-up-travis-ci-and-coveralls)
+
 # Navyget E-commerce Api
 
 ---
