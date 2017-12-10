@@ -6,27 +6,35 @@ class Config(object):
     DEBUG = False
     CSRF_ENABLED = True
     SECRET = os.getenv('SECRET') or 'this-is-a-secret-key'
-    SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL') or 'postgresql://localhost/navyget_api'
+    MONGODB_DB = 'navyget_api'
+    MONGODB_HOST = 'localhost'
+    MONGODB_PORT = 27017
 
 
 class DevelopmentConfig(Config):
     """Configurations for Development."""
     DEBUG = True
 
+
 class TestingConfig(Config):
     """Configurations for Testing, with a separate test database."""
     TESTING = True
-    SQLALCHEMY_DATABASE_URI = os.getenv('TEST_DATABASE_URL') or 'postgresql://localhost/test_navy_db'
+    MONGODB_DB = 'test_navy_api'
+    MONGODB_PORT = 'localhost'
+    MONGODB_PORT = 27017
     DEBUG = True
+
 
 class StagingConfig(Config):
     """Configurations for Staging."""
     DEBUG = True
 
+
 class ProductionConfig(Config):
     """Configurations for Production."""
     DEBUG = False
     TESTING = False
+
 
 app_config = {
     'development': DevelopmentConfig,
