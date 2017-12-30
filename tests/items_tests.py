@@ -18,7 +18,7 @@ class TestItems(BaseTestCase):
         :return: 201 response
         """
         create_store = self.client.post(create_store_url, data=json.dumps(self.shop_zero), headers=self.my_header)
-        store_id = json.loads(create_store.data)
+        store_id = json.loads(create_store.data.decode('utf-8'))
         store_id = json.loads(store_id['store_id'])
         store_id = store_id['$oid']
         response2 = self.client.post(store_url + store_id + '/' + 'item/',
@@ -48,7 +48,7 @@ class TestItems(BaseTestCase):
         }
 
         create_store = self.client.post(create_store_url, data=json.dumps(self.shop_zero), headers=self.my_header)
-        store_id = json.loads(create_store.data)
+        store_id = json.loads(create_store.data.decode('utf-8'))
         store_id = json.loads(store_id['store_id'])
         store_id = store_id['$oid']
         response2 = self.client.post(store_url + store_id + '/' + 'item/',
@@ -78,7 +78,7 @@ class TestItems(BaseTestCase):
         }
 
         create_store = self.client.post(create_store_url, data=json.dumps(self.shop_zero), headers=self.my_header)
-        store_id = json.loads(create_store.data)
+        store_id = json.loads(create_store.data.decode('utf-8'))
         store_id = json.loads(store_id['store_id'])
         store_id = store_id['$oid']
         response2 = self.client.post(store_url + store_id + '/' + 'item/',
@@ -108,7 +108,7 @@ class TestItems(BaseTestCase):
         }
 
         create_store = self.client.post(create_store_url, data=json.dumps(self.shop_zero), headers=self.my_header)
-        store_id = json.loads(create_store.data)
+        store_id = json.loads(create_store.data.decode('utf-8'))
         store_id = json.loads(store_id['store_id'])
         store_id = store_id['$oid']
         response2 = self.client.post(store_url + store_id + '/' + 'item/',
@@ -138,7 +138,7 @@ class TestItems(BaseTestCase):
         }
 
         create_store = self.client.post(create_store_url, data=json.dumps(self.shop_zero), headers=self.my_header)
-        store_id = json.loads(create_store.data)
+        store_id = json.loads(create_store.data.decode('utf-8'))
         store_id = json.loads(store_id['store_id'])
         store_id = store_id['$oid']
         response2 = self.client.post(store_url + store_id + '/' + 'item/',
@@ -168,7 +168,7 @@ class TestItems(BaseTestCase):
         }
 
         create_store = self.client.post(create_store_url, data=json.dumps(self.shop_zero), headers=self.my_header)
-        store_id = json.loads(create_store.data)
+        store_id = json.loads(create_store.data.decode('utf-8'))
         store_id = json.loads(store_id['store_id'])
         store_id = store_id['$oid']
         response2 = self.client.post(store_url + store_id + '/' + 'item/',
@@ -198,7 +198,7 @@ class TestItems(BaseTestCase):
         }
 
         create_store = self.client.post(create_store_url, data=json.dumps(self.shop_zero), headers=self.my_header)
-        store_id = json.loads(create_store.data)
+        store_id = json.loads(create_store.data.decode('utf-8'))
         store_id = json.loads(store_id['store_id'])
         store_id = store_id['$oid']
         response2 = self.client.post(store_url + store_id + '/' + 'item/',
@@ -228,7 +228,7 @@ class TestItems(BaseTestCase):
         }
 
         create_store = self.client.post(create_store_url, data=json.dumps(self.shop_zero), headers=self.my_header)
-        store_id = json.loads(create_store.data)
+        store_id = json.loads(create_store.data.decode('utf-8'))
         store_id = json.loads(store_id['store_id'])
         store_id = store_id['$oid']
         response2 = self.client.post(store_url + store_id + '/' + 'item/',
@@ -258,7 +258,7 @@ class TestItems(BaseTestCase):
         }
 
         create_store = self.client.post(create_store_url, data=json.dumps(self.shop_zero), headers=self.my_header)
-        store_id = json.loads(create_store.data)
+        store_id = json.loads(create_store.data.decode('utf-8'))
         store_id = json.loads(store_id['store_id'])
         store_id = store_id['$oid']
         response2 = self.client.post(store_url + store_id + '/' + 'item/',
@@ -288,7 +288,7 @@ class TestItems(BaseTestCase):
         }
 
         create_store = self.client.post(create_store_url, data=json.dumps(self.shop_zero), headers=self.my_header)
-        store_id = json.loads(create_store.data)
+        store_id = json.loads(create_store.data.decode('utf-8'))
         store_id = json.loads(store_id['store_id'])
         store_id = store_id['$oid']
         response2 = self.client.post(store_url + store_id + '/' + 'item/',
@@ -318,7 +318,7 @@ class TestItems(BaseTestCase):
         }
 
         create_store = self.client.post(create_store_url, data=json.dumps(self.shop_zero), headers=self.my_header)
-        store_id = json.loads(create_store.data)
+        store_id = json.loads(create_store.data.decode('utf-8'))
         store_id = json.loads(store_id['store_id'])
         store_id = store_id['$oid']
         response2 = self.client.post(store_url + store_id + '/' + 'item/',
@@ -348,7 +348,7 @@ class TestItems(BaseTestCase):
         }
 
         create_store = self.client.post(create_store_url, data=json.dumps(self.shop_zero), headers=self.my_header)
-        store_id = json.loads(create_store.data)
+        store_id = json.loads(create_store.data.decode('utf-8'))
         store_id = json.loads(store_id['store_id'])
         store_id = store_id['$oid']
         response2 = self.client.post(store_url + store_id + '/' + 'item/',
@@ -378,7 +378,7 @@ class TestItems(BaseTestCase):
         }
 
         create_store = self.client.post(create_store_url, data=json.dumps(self.shop_zero), headers=self.my_header)
-        store_id = json.loads(create_store.data)
+        store_id = json.loads(create_store.data.decode('utf-8'))
         store_id = json.loads(store_id['store_id'])
         store_id = store_id['$oid']
         response2 = self.client.post(store_url + store_id + '/' + 'item/',
@@ -393,7 +393,7 @@ class TestItems(BaseTestCase):
         :return:
         """
         create_store = self.client.post(create_store_url, data=json.dumps(self.shop_zero), headers=self.my_header)
-        store_id = json.loads(create_store.data)
+        store_id = json.loads(create_store.data.decode('utf-8'))
         store_id = json.loads(store_id['store_id'])
         store_id = store_id['$oid']
         response2 = self.client.post(store_url + store_id + '/' + 'item/',
@@ -411,7 +411,7 @@ class TestItems(BaseTestCase):
         :return:
         """
         create_store = self.client.post(create_store_url, data=json.dumps(self.shop_zero), headers=self.my_header)
-        store_id = json.loads(create_store.data)
+        store_id = json.loads(create_store.data.decode('utf-8'))
         store_id = json.loads(store_id['store_id'])
         store_id = store_id['$oid']
         response2 = self.client.post('/navyget-api/v1/store//', data=json.dumps(self.item_zero), headers=self.my_header)
@@ -435,7 +435,7 @@ class TestItems(BaseTestCase):
         :return:
         """
         create_store = self.client.post(create_store_url, data=json.dumps(self.shop_zero), headers=self.my_header)
-        store_id = json.loads(create_store.data)
+        store_id = json.loads(create_store.data.decode('utf-8'))
         store_id = json.loads(store_id['store_id'])
         store_id = store_id['$oid']
         response2 = self.client.post(store_url + store_id + '/' + 'item/',
@@ -478,7 +478,7 @@ class TestItems(BaseTestCase):
         :return:
         """
         create_store = self.client.post(create_store_url, data=json.dumps(self.shop_zero), headers=self.my_header)
-        store_id = json.loads(create_store.data)
+        store_id = json.loads(create_store.data.decode('utf-8'))
         store_id = json.loads(store_id['store_id'])
         store_id = store_id['$oid']
         get_response = self.client.get(store_url + store_id + '/item/5a2bc733791e4bbc9a26f7a5/',
@@ -493,7 +493,7 @@ class TestItems(BaseTestCase):
         :return:
         """
         create_store = self.client.post(create_store_url, data=json.dumps(self.shop_zero), headers=self.my_header)
-        store_id = json.loads(create_store.data)
+        store_id = json.loads(create_store.data.decode('utf-8'))
         store_id = json.loads(store_id['store_id'])
         store_id = store_id['$oid']
         response2 = self.client.post(store_url + store_id + '/item/',
@@ -506,7 +506,7 @@ class TestItems(BaseTestCase):
                                      headers=self.my_header)
         self.assertEqual(response3.status, "201 CREATED")
         self.assertIn("Success. You have added Good Kid Mad City to the store.", str(response3.data))
-        item_id = json.loads(response2.data)
+        item_id = json.loads(response2.data.decode('utf-8'))
         item_id = item_id['item_identifier']
         get_response = self.client.get(store_url + store_id + '/item/' + item_id + '/',
                                        headers=self.my_header)
@@ -536,7 +536,7 @@ class TestItems(BaseTestCase):
         }
         create_store = self.client.post(create_store_url, data=json.dumps(self.shop_zero), headers=self.my_header)
         self.assertEqual(create_store.status, "201 CREATED")
-        store_id = json.loads(create_store.data)
+        store_id = json.loads(create_store.data.decode('utf-8'))
         store_id = json.loads(store_id['store_id'])
         store_id = store_id['$oid']
         response2 = self.client.post(store_url + store_id + '/item/',
@@ -544,7 +544,7 @@ class TestItems(BaseTestCase):
                                      headers=self.my_header)
         self.assertEqual(response2.status, "201 CREATED")
         self.assertIn("Success. You have added Damn to the store.", str(response2.data))
-        item_id = json.loads(response2.data)
+        item_id = json.loads(response2.data.decode('utf-8'))
         item_id = item_id['item_identifier']
         response3 = self.client.put(store_url + store_id + '/item/' + item_id + '/',
                                     data=json.dumps(self.data),
@@ -573,7 +573,7 @@ class TestItems(BaseTestCase):
         }
         create_store = self.client.post(create_store_url, data=json.dumps(self.shop_zero), headers=self.my_header)
         self.assertEqual(create_store.status, "201 CREATED")
-        store_id = json.loads(create_store.data)
+        store_id = json.loads(create_store.data.decode('utf-8'))
         store_id = json.loads(store_id['store_id'])
         store_id = store_id['$oid']
         response2 = self.client.post(store_url + store_id + '/item/',
@@ -581,7 +581,7 @@ class TestItems(BaseTestCase):
                                      headers=self.my_header)
         self.assertEqual(response2.status, "201 CREATED")
         self.assertIn("Success. You have added Damn to the store.", str(response2.data))
-        item_id = json.loads(response2.data)
+        item_id = json.loads(response2.data.decode('utf-8'))
         item_id = item_id['item_identifier']
         response3 = self.client.put(store_url + store_id + '/item/5a2bc733791e4bbc9a26f7a5/',
                                     data=json.dumps(self.data),
@@ -635,7 +635,7 @@ class TestItems(BaseTestCase):
         }
         create_store = self.client.post(create_store_url, data=json.dumps(self.shop_zero), headers=self.my_header)
         self.assertEqual(create_store.status, "201 CREATED")
-        store_id = json.loads(create_store.data)
+        store_id = json.loads(create_store.data.decode('utf-8'))
         store_id = json.loads(store_id['store_id'])
         store_id = store_id['$oid']
         response2 = self.client.post(store_url + store_id + '/item/',
@@ -643,7 +643,7 @@ class TestItems(BaseTestCase):
                                      headers=self.my_header)
         self.assertEqual(response2.status, "201 CREATED")
         self.assertIn("Success. You have added Damn to the store.", str(response2.data))
-        item_id = json.loads(response2.data)
+        item_id = json.loads(response2.data.decode('utf-8'))
         item_id = item_id['item_identifier']
         response3 = self.client.put(store_url + store_id + '/item//',
                                     data=json.dumps(self.data),
@@ -671,7 +671,7 @@ class TestItems(BaseTestCase):
         }
         create_store = self.client.post(create_store_url, data=json.dumps(self.shop_zero), headers=self.my_header)
         self.assertEqual(create_store.status, "201 CREATED")
-        store_id = json.loads(create_store.data)
+        store_id = json.loads(create_store.data.decode('utf-8'))
         store_id = json.loads(store_id['store_id'])
         store_id = store_id['$oid']
         response2 = self.client.post(store_url + store_id + '/item/',
@@ -679,7 +679,7 @@ class TestItems(BaseTestCase):
                                      headers=self.my_header)
         self.assertEqual(response2.status, "201 CREATED")
         self.assertIn("Success. You have added Damn to the store.", str(response2.data))
-        item_id = json.loads(response2.data)
+        item_id = json.loads(response2.data.decode('utf-8'))
         item_id = item_id['item_identifier']
         response3 = self.client.put(store_url + store_id + '/item/' + item_id + '/',
                                     data=json.dumps(self.data),
@@ -708,7 +708,7 @@ class TestItems(BaseTestCase):
         }
         create_store = self.client.post(create_store_url, data=json.dumps(self.shop_zero), headers=self.my_header)
         self.assertEqual(create_store.status, "201 CREATED")
-        store_id = json.loads(create_store.data)
+        store_id = json.loads(create_store.data.decode('utf-8'))
         store_id = json.loads(store_id['store_id'])
         store_id = store_id['$oid']
         response2 = self.client.post(store_url + store_id + '/item/',
@@ -716,7 +716,7 @@ class TestItems(BaseTestCase):
                                      headers=self.my_header)
         self.assertEqual(response2.status, "201 CREATED")
         self.assertIn("Success. You have added Damn to the store.", str(response2.data))
-        item_id = json.loads(response2.data)
+        item_id = json.loads(response2.data.decode('utf-8'))
         item_id = item_id['item_identifier']
         response3 = self.client.put(store_url + store_id + '/item/' + item_id + '/',
                                     data=json.dumps(self.data),
@@ -745,7 +745,7 @@ class TestItems(BaseTestCase):
         }
         create_store = self.client.post(create_store_url, data=json.dumps(self.shop_zero), headers=self.my_header)
         self.assertEqual(create_store.status, "201 CREATED")
-        store_id = json.loads(create_store.data)
+        store_id = json.loads(create_store.data.decode('utf-8'))
         store_id = json.loads(store_id['store_id'])
         store_id = store_id['$oid']
         response2 = self.client.post(store_url + store_id + '/item/',
@@ -753,7 +753,7 @@ class TestItems(BaseTestCase):
                                      headers=self.my_header)
         self.assertEqual(response2.status, "201 CREATED")
         self.assertIn("Success. You have added Damn to the store.", str(response2.data))
-        item_id = json.loads(response2.data)
+        item_id = json.loads(response2.data.decode('utf-8'))
         item_id = item_id['item_identifier']
         response3 = self.client.put(store_url + store_id + '/item/' + item_id + '/',
                                     data=json.dumps(self.data),
@@ -782,7 +782,7 @@ class TestItems(BaseTestCase):
         }
         create_store = self.client.post(create_store_url, data=json.dumps(self.shop_zero), headers=self.my_header)
         self.assertEqual(create_store.status, "201 CREATED")
-        store_id = json.loads(create_store.data)
+        store_id = json.loads(create_store.data.decode('utf-8'))
         store_id = json.loads(store_id['store_id'])
         store_id = store_id['$oid']
         response2 = self.client.post(store_url + store_id + '/item/',
@@ -790,7 +790,7 @@ class TestItems(BaseTestCase):
                                      headers=self.my_header)
         self.assertEqual(response2.status, "201 CREATED")
         self.assertIn("Success. You have added Damn to the store.", str(response2.data))
-        item_id = json.loads(response2.data)
+        item_id = json.loads(response2.data.decode('utf-8'))
         item_id = item_id['item_identifier']
         response3 = self.client.put(store_url + store_id + '/item/' + item_id + '/',
                                     data=json.dumps(self.data),
@@ -819,7 +819,7 @@ class TestItems(BaseTestCase):
         }
         create_store = self.client.post(create_store_url, data=json.dumps(self.shop_zero), headers=self.my_header)
         self.assertEqual(create_store.status, "201 CREATED")
-        store_id = json.loads(create_store.data)
+        store_id = json.loads(create_store.data.decode('utf-8'))
         store_id = json.loads(store_id['store_id'])
         store_id = store_id['$oid']
         response2 = self.client.post(store_url + store_id + '/item/',
@@ -827,7 +827,7 @@ class TestItems(BaseTestCase):
                                      headers=self.my_header)
         self.assertEqual(response2.status, "201 CREATED")
         self.assertIn("Success. You have added Damn to the store.", str(response2.data))
-        item_id = json.loads(response2.data)
+        item_id = json.loads(response2.data.decode('utf-8'))
         item_id = item_id['item_identifier']
         response3 = self.client.put(store_url + store_id + '/item/' + item_id + '/',
                                     data=json.dumps(self.data),
@@ -856,7 +856,7 @@ class TestItems(BaseTestCase):
         }
         create_store = self.client.post(create_store_url, data=json.dumps(self.shop_zero), headers=self.my_header)
         self.assertEqual(create_store.status, "201 CREATED")
-        store_id = json.loads(create_store.data)
+        store_id = json.loads(create_store.data.decode('utf-8'))
         store_id = json.loads(store_id['store_id'])
         store_id = store_id['$oid']
         response2 = self.client.post(store_url + store_id + '/item/',
@@ -864,7 +864,7 @@ class TestItems(BaseTestCase):
                                      headers=self.my_header)
         self.assertEqual(response2.status, "201 CREATED")
         self.assertIn("Success. You have added Damn to the store.", str(response2.data))
-        item_id = json.loads(response2.data)
+        item_id = json.loads(response2.data.decode('utf-8'))
         item_id = item_id['item_identifier']
         response3 = self.client.put(store_url + store_id + '/item/' + item_id + '/',
                                     data=json.dumps(self.data),
@@ -893,7 +893,7 @@ class TestItems(BaseTestCase):
         }
         create_store = self.client.post(create_store_url, data=json.dumps(self.shop_zero), headers=self.my_header)
         self.assertEqual(create_store.status, "201 CREATED")
-        store_id = json.loads(create_store.data)
+        store_id = json.loads(create_store.data.decode('utf-8'))
         store_id = json.loads(store_id['store_id'])
         store_id = store_id['$oid']
         response2 = self.client.post(store_url + store_id + '/item/',
@@ -901,7 +901,7 @@ class TestItems(BaseTestCase):
                                      headers=self.my_header)
         self.assertEqual(response2.status, "201 CREATED")
         self.assertIn("Success. You have added Damn to the store.", str(response2.data))
-        item_id = json.loads(response2.data)
+        item_id = json.loads(response2.data.decode('utf-8'))
         item_id = item_id['item_identifier']
         response3 = self.client.put(store_url + store_id + '/item/' + item_id + '/',
                                     data=json.dumps(self.data),
@@ -930,7 +930,7 @@ class TestItems(BaseTestCase):
         }
         create_store = self.client.post(create_store_url, data=json.dumps(self.shop_zero), headers=self.my_header)
         self.assertEqual(create_store.status, "201 CREATED")
-        store_id = json.loads(create_store.data)
+        store_id = json.loads(create_store.data.decode('utf-8'))
         store_id = json.loads(store_id['store_id'])
         store_id = store_id['$oid']
         response2 = self.client.post(store_url + store_id + '/item/',
@@ -938,7 +938,7 @@ class TestItems(BaseTestCase):
                                      headers=self.my_header)
         self.assertEqual(response2.status, "201 CREATED")
         self.assertIn("Success. You have added Damn to the store.", str(response2.data))
-        item_id = json.loads(response2.data)
+        item_id = json.loads(response2.data.decode('utf-8'))
         item_id = item_id['item_identifier']
         response3 = self.client.put(store_url + store_id + '/item/' + item_id + '/',
                                     data=json.dumps(self.data),
@@ -967,7 +967,7 @@ class TestItems(BaseTestCase):
         }
         create_store = self.client.post(create_store_url, data=json.dumps(self.shop_zero), headers=self.my_header)
         self.assertEqual(create_store.status, "201 CREATED")
-        store_id = json.loads(create_store.data)
+        store_id = json.loads(create_store.data.decode('utf-8'))
         store_id = json.loads(store_id['store_id'])
         store_id = store_id['$oid']
         response2 = self.client.post(store_url + store_id + '/item/',
@@ -975,7 +975,7 @@ class TestItems(BaseTestCase):
                                      headers=self.my_header)
         self.assertEqual(response2.status, "201 CREATED")
         self.assertIn("Success. You have added Damn to the store.", str(response2.data))
-        item_id = json.loads(response2.data)
+        item_id = json.loads(response2.data.decode('utf-8'))
         item_id = item_id['item_identifier']
         response3 = self.client.put(store_url + store_id + '/item/' + item_id + '/',
                                     data=json.dumps(self.data),
@@ -992,7 +992,7 @@ class TestItems(BaseTestCase):
         """
         create_store = self.client.post(create_store_url, data=json.dumps(self.shop_zero), headers=self.my_header)
         self.assertEqual(create_store.status, "201 CREATED")
-        store_id = json.loads(create_store.data)
+        store_id = json.loads(create_store.data.decode('utf-8'))
         store_id = json.loads(store_id['store_id'])
         store_id = store_id['$oid']
         response2 = self.client.post(store_url + store_id + '/item/',
@@ -1000,7 +1000,7 @@ class TestItems(BaseTestCase):
                                      headers=self.my_header)
         self.assertEqual(response2.status, "201 CREATED")
         self.assertIn("Success. You have added Damn to the store.", str(response2.data))
-        item_id = json.loads(response2.data)
+        item_id = json.loads(response2.data.decode('utf-8'))
         item_id = item_id['item_identifier']
         response3 = self.client.delete(store_url + store_id + '/item/' + item_id + '/',
                                        headers=self.my_header)
@@ -1035,7 +1035,7 @@ class TestItems(BaseTestCase):
         :return:
         """
         create_store = self.client.post(create_store_url, data=json.dumps(self.shop_zero), headers=self.my_header)
-        store_id = json.loads(create_store.data)
+        store_id = json.loads(create_store.data.decode('utf-8'))
         store_id = json.loads(store_id['store_id'])
         store_id = store_id['$oid']
         response2 = self.client.post(store_url + store_id + '/' + 'item/',
@@ -1057,7 +1057,7 @@ class TestItems(BaseTestCase):
         :return:
         """
         create_store = self.client.post(create_store_url, data=json.dumps(self.shop_zero), headers=self.my_header)
-        store_id = json.loads(create_store.data)
+        store_id = json.loads(create_store.data.decode('utf-8'))
         store_id = json.loads(store_id['store_id'])
         store_id = store_id['$oid']
         response2 = self.client.post(store_url + store_id + '/' + 'item/',

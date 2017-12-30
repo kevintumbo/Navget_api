@@ -1,7 +1,8 @@
 import json
 from .base_test import BaseTestCase
 
-register_url = '/navyget-api/v1/auth/register'
+user_register_url = '/navyget-api/v1/auth/user-register'
+business_register_url = '/navyget-api/v1/auth/business-register'
 login_url = '/navyget-api/v1/auth/login'
 
 
@@ -23,7 +24,7 @@ class TestAuthentication(BaseTestCase):
         }
 
         # make a post request and receive a success response
-        response = self.client.post(register_url, data=json.dumps(self.data), headers={"Content-Type": "application/json"})
+        response = self.client.post(user_register_url, data=json.dumps(self.data), headers={"Content-Type": "application/json"})
         self.assertEqual(response.status, "201 CREATED")
         self.assertIn("Success. You have registered. You can Log in", str(response.data))
 
@@ -42,7 +43,7 @@ class TestAuthentication(BaseTestCase):
         }
 
         # make a post request and receive a failure response
-        response = self.client.post(register_url, data=json.dumps(self.data), headers={"Content-Type":"application/json"})
+        response = self.client.post(user_register_url, data=json.dumps(self.data), headers={"Content-Type":"application/json"})
         self.assertEqual(response.status, "400 BAD REQUEST")
         self.assertIn("Error. Missing First Name", str(response.data))
 
@@ -60,7 +61,7 @@ class TestAuthentication(BaseTestCase):
         }
 
         # make a post request and receive a failure response
-        response = self.client.post(register_url, data=json.dumps(self.data), headers={"Content-Type":"application/json"}) 
+        response = self.client.post(user_register_url, data=json.dumps(self.data), headers={"Content-Type":"application/json"}) 
         self.assertEqual(response.status, "400 BAD REQUEST")
         self.assertIn("Error. Missing Last Name", str(response.data))
 
@@ -79,7 +80,7 @@ class TestAuthentication(BaseTestCase):
         }
 
         # make a post request and receive a failure response
-        response = self.client.post(register_url, data=json.dumps(self.data), headers={"Content-Type":"application/json"})
+        response = self.client.post(user_register_url, data=json.dumps(self.data), headers={"Content-Type":"application/json"})
         self.assertEqual(response.status, "400 BAD REQUEST")
         self.assertIn("Error. Missing Username", str(response.data))
 
@@ -98,7 +99,7 @@ class TestAuthentication(BaseTestCase):
         }
 
         # make a post request and receive a failure response
-        response = self.client.post(register_url, data=json.dumps(self.data), headers={"Content-Type":"application/json"})
+        response = self.client.post(user_register_url, data=json.dumps(self.data), headers={"Content-Type":"application/json"})
         self.assertEqual(response.status, "400 BAD REQUEST")
         self.assertIn("Error. Missing Email", str(response.data))
 
@@ -117,7 +118,7 @@ class TestAuthentication(BaseTestCase):
         }
 
         # make a post request and receive a failure response
-        response = self.client.post(register_url, data=json.dumps(self.data), headers={"Content-Type":"application/json"})
+        response = self.client.post(user_register_url, data=json.dumps(self.data), headers={"Content-Type":"application/json"})
         self.assertEqual(response.status, "400 BAD REQUEST")
         self.assertIn("Error. Missing Password", str(response.data))
 
@@ -127,7 +128,7 @@ class TestAuthentication(BaseTestCase):
         (Post Request)
         """
         # create initial user
-        response = self.client.post(register_url, data=json.dumps(self.user_zero), headers={"Content-Type": "application/json"})
+        response = self.client.post(user_register_url, data=json.dumps(self.user_zero), headers={"Content-Type": "application/json"})
 
         # create new user with duplicate username
         self.data = {
@@ -139,7 +140,7 @@ class TestAuthentication(BaseTestCase):
         }
 
         # make a post request and receive a failure response
-        response = self.client.post(register_url, data=json.dumps(self.data), headers={"Content-Type": "application/json"})
+        response = self.client.post(user_register_url, data=json.dumps(self.data), headers={"Content-Type": "application/json"})
         self.assertEqual(response.status, "409 CONFLICT")
         self.assertIn("Error. Username Already Exists", str(response.data))
 
@@ -150,7 +151,7 @@ class TestAuthentication(BaseTestCase):
         """
 
         # create initial user
-        response = self.client.post(register_url, data=json.dumps(self.user_zero), headers={"Content-Type":"application/json"})
+        response = self.client.post(user_register_url, data=json.dumps(self.user_zero), headers={"Content-Type":"application/json"})
 
         # create new user with duplicate email
         self.data = {
@@ -162,7 +163,7 @@ class TestAuthentication(BaseTestCase):
         }
 
         # make a post request and receive a failure response
-        response = self.client.post(register_url, data=json.dumps(self.data), headers={"Content-Type":"application/json"})
+        response = self.client.post(user_register_url, data=json.dumps(self.data), headers={"Content-Type":"application/json"})
         self.assertEqual(response.status, "409 CONFLICT")
         self.assertIn("Error. Email Address Already Exists", str(response.data))
 
@@ -181,7 +182,7 @@ class TestAuthentication(BaseTestCase):
         }
 
         # make a post request and receive a failure response
-        response = self.client.post(register_url, data=json.dumps(self.data), headers={"Content-Type":"application/json"})
+        response = self.client.post(user_register_url, data=json.dumps(self.data), headers={"Content-Type":"application/json"})
         self.assertEqual(response.status, "400 BAD REQUEST")
         self.assertIn("Error. First Name Has Invalid Characters", str(response.data))
 
@@ -200,7 +201,7 @@ class TestAuthentication(BaseTestCase):
         }
 
         # make a post request and receive a failure response
-        response = self.client.post(register_url, data=json.dumps(self.data), headers={"Content-Type":"application/json"})
+        response = self.client.post(user_register_url, data=json.dumps(self.data), headers={"Content-Type":"application/json"})
         self.assertEqual(response.status, "400 BAD REQUEST")
         self.assertIn("Error. Last Name Has Invalid Characters", str(response.data))
 
@@ -219,7 +220,7 @@ class TestAuthentication(BaseTestCase):
         }
 
         # make a post request and receive a failure response
-        response = self.client.post(register_url, data=json.dumps(self.data), headers={"Content-Type":"application/json"})
+        response = self.client.post(user_register_url, data=json.dumps(self.data), headers={"Content-Type":"application/json"})
         self.assertEqual(response.status, "400 BAD REQUEST")
         self.assertIn("Error. Username Has Invalid Characters", str(response.data))
 
@@ -238,7 +239,7 @@ class TestAuthentication(BaseTestCase):
         }
 
         # make a post request and receive a failure response
-        response = self.client.post(register_url, data=json.dumps(self.data), headers={"Content-Type":"application/json"})
+        response = self.client.post(user_register_url, data=json.dumps(self.data), headers={"Content-Type":"application/json"})
         self.assertEqual(response.status, "400 BAD REQUEST")
         self.assertIn("Error. Invalid Email Format", str(response.data))
 
@@ -249,7 +250,7 @@ class TestAuthentication(BaseTestCase):
         """
 
         # create initial user
-        response = self.client.post(register_url, data=json.dumps(self.user_zero), headers={"Content-Type":"application/json"})
+        response = self.client.post(user_register_url, data=json.dumps(self.user_zero), headers={"Content-Type":"application/json"})
 
         # log in using user credentials
         self.data = {
@@ -268,7 +269,7 @@ class TestAuthentication(BaseTestCase):
         """
 
         # create initial user
-        response = self.client.post(register_url, data=json.dumps(self.user_zero), headers={"Content-Type":"application/json"})
+        response = self.client.post(user_register_url, data=json.dumps(self.user_zero), headers={"Content-Type":"application/json"})
 
         # log in using user credentials
         self.data = {
@@ -288,7 +289,7 @@ class TestAuthentication(BaseTestCase):
         """
 
         # create initial user
-        response = self.client.post(register_url, data=json.dumps(self.user_zero), headers={"Content-Type":"application/json"})
+        response = self.client.post(user_register_url, data=json.dumps(self.user_zero), headers={"Content-Type":"application/json"})
 
         # log in using user credentials
         self.data = {
@@ -308,7 +309,7 @@ class TestAuthentication(BaseTestCase):
         """
 
         # create initial user
-        response = self.client.post(register_url, data=json.dumps(self.user_zero), headers={"Content-Type":"application/json"})
+        response = self.client.post(user_register_url, data=json.dumps(self.user_zero), headers={"Content-Type":"application/json"})
 
         # log in using user credentials
         self.data = {
@@ -328,7 +329,7 @@ class TestAuthentication(BaseTestCase):
         """
 
         # create initial user
-        response = self.client.post(register_url, data=json.dumps(self.user_zero), headers={"Content-Type":"application/json"})
+        response = self.client.post(user_register_url, data=json.dumps(self.user_zero), headers={"Content-Type":"application/json"})
 
         # log in using user credentials
         self.data = {
@@ -346,7 +347,7 @@ class TestAuthentication(BaseTestCase):
         fails to log in user with invalid email format
         """
         # create initial user
-        response = self.client.post(register_url, data=json.dumps(self.user_zero), headers={"Content-Type":"application/json"})
+        response = self.client.post(user_register_url, data=json.dumps(self.user_zero), headers={"Content-Type":"application/json"})
 
         # log in using user credentials
         self.data = {

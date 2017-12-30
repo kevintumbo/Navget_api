@@ -16,9 +16,9 @@ def hash_password(password):
     return password
 
 
-class Registration(Resource):
+class UserRegistration(Resource):
     """
-    Api resource for Registration of a user
+    Api resource for Registration of a Normal user
     """
     def __init__(self):
         self.parser = reqparse.RequestParser()
@@ -161,6 +161,13 @@ class Registration(Resource):
 
             return response, 409
 
+
+class BusinessRegistration(Resource):
+    """
+    Api resource for a Business user
+    """
+    pass
+
   
 class Login(Resource):
     """
@@ -232,9 +239,11 @@ class Login(Resource):
             return response, 500
 
 # make resource accessible to the system
-# http://127.0.0.1:5000/navyget-api/v1/auth/register
+# http://127.0.0.1:5000/navyget-api/v1/auth/user-register
+# http://127.0.0.1:5000/navyget-api/v1/auth/business-register
 # http://127.0.0.1:5000/navyget-api/v1/auth/login
 
 
-api_auth.add_resource(Registration, '/navyget-api/v1/auth/register')
+api_auth.add_resource(UserRegistration, '/navyget-api/v1/auth/user-register')
+api_auth.add_resource(BusinessRegistration, '/navyget-api/v1/auth/business-register')
 api_auth.add_resource(Login, '/navyget-api/v1/auth/login')

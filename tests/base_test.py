@@ -4,7 +4,8 @@ import json
 
 import unittest
 
-register_url = '/navyget-api/v1/auth/register'
+user_register_url = '/navyget-api/v1/auth/user-register'
+business_register_url = '/navyget-api/v1/auth/business-register'
 login_url = '/navyget-api/v1/auth/login'
 create_store_url = '/navyget-api/v1/store/'
 
@@ -165,7 +166,7 @@ class BaseTestCase(unittest.TestCase):
             db = connect('test_navy_api')
 
             # register and log in user
-            response = self.client.post(register_url, data=json.dumps(self.user_zero), headers={"Content-Type": "application/json"})
+            response = self.client.post(user_register_url, data=json.dumps(self.user_zero), headers={"Content-Type": "application/json"})
             self.assertEqual(response.status, "201 CREATED")
             self.user_login = {
                 "email": "kdot@gmail.com",

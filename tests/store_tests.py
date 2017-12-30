@@ -288,7 +288,7 @@ class TestStore(BaseTestCase):
                     "title": "location_2",
                     "area": "Kilimani",
                     "physical_address": "",
-                    "town_city": "",
+                    "town_city": "Nairobi",
                     "county": "Nairobi",
                     "country": "Kenya"
                 }
@@ -368,7 +368,7 @@ class TestStore(BaseTestCase):
         """
         # create a store and retrieve store id
         create_store = self.client.post(store_url, data=json.dumps(self.shop_zero), headers=self.my_header)
-        store_id = json.loads(create_store.data)
+        store_id = json.loads(create_store.data.decode('utf-8'))
         store_id = json.loads(store_id['store_id'])
         store_id = store_id['$oid']
         response2 = self.client.post(store_url, data=json.dumps(self.shop_one), headers=self.my_header)
@@ -432,7 +432,7 @@ class TestStore(BaseTestCase):
         }
         response1 = self.client.post(store_url, data=json.dumps(self.shop_zero), headers=self.my_header)
         self.assertEqual(response1.status, "201 CREATED")
-        store_id = json.loads(response1.data)
+        store_id = json.loads(response1.data.decode('utf-8'))
         store_id = json.loads(store_id['store_id'])
         store_id = store_id['$oid']
         response2 = self.client.put(store_url + store_id + '/', data=json.dumps(self.data), headers=self.my_header)
@@ -482,7 +482,7 @@ class TestStore(BaseTestCase):
         }
         response1 = self.client.post(store_url, data=json.dumps(self.shop_zero), headers=self.my_header)
         self.assertEqual(response1.status, "201 CREATED")
-        store_id = json.loads(response1.data)
+        store_id = json.loads(response1.data.decode('utf-8'))
         store_id = json.loads(store_id['store_id'])
         store_id = store_id['$oid']
         response2 = self.client.put(store_url + store_id + '/', data=json.dumps(self.data), headers=self.my_header)
@@ -511,7 +511,7 @@ class TestStore(BaseTestCase):
         }
         response1 = self.client.post(store_url, data=json.dumps(self.shop_zero), headers=self.my_header)
         self.assertEqual(response1.status, "201 CREATED")
-        store_id = json.loads(response1.data)
+        store_id = json.loads(response1.data.decode('utf-8'))
         store_id = json.loads(store_id['store_id'])
         store_id = store_id['$oid']
         response2 = self.client.put(store_url + store_id + '/', data=json.dumps(self.data), headers=self.my_header)
@@ -540,7 +540,7 @@ class TestStore(BaseTestCase):
         }
         response1 = self.client.post(store_url, data=json.dumps(self.shop_zero), headers=self.my_header)
         self.assertEqual(response1.status, "201 CREATED")
-        store_id = json.loads(response1.data)
+        store_id = json.loads(response1.data.decode('utf-8'))
         store_id = json.loads(store_id['store_id'])
         store_id = store_id['$oid']
         response2 = self.client.put(store_url + store_id + '/', data=json.dumps(self.data), headers=self.my_header)
@@ -569,7 +569,7 @@ class TestStore(BaseTestCase):
         }
         response1 = self.client.post(store_url, data=json.dumps(self.shop_zero), headers=self.my_header)
         self.assertEqual(response1.status, "201 CREATED")
-        store_id = json.loads(response1.data)
+        store_id = json.loads(response1.data.decode('utf-8'))
         store_id = json.loads(store_id['store_id'])
         store_id = store_id['$oid']
         response2 = self.client.put(store_url + store_id + '/', data=json.dumps(self.data), headers=self.my_header)
@@ -598,7 +598,7 @@ class TestStore(BaseTestCase):
         }
         response1 = self.client.post(store_url, data=json.dumps(self.shop_zero), headers=self.my_header)
         self.assertEqual(response1.status, "201 CREATED")
-        store_id = json.loads(response1.data)
+        store_id = json.loads(response1.data.decode('utf-8'))
         store_id = json.loads(store_id['store_id'])
         store_id = store_id['$oid']
         response2 = self.client.put(store_url + store_id + '/', data=json.dumps(self.data), headers=self.my_header)
@@ -627,7 +627,7 @@ class TestStore(BaseTestCase):
         }
         response1 = self.client.post(store_url, data=json.dumps(self.shop_zero), headers=self.my_header)
         self.assertEqual(response1.status, "201 CREATED")
-        store_id = json.loads(response1.data)
+        store_id = json.loads(response1.data.decode('utf-8'))
         store_id = json.loads(store_id['store_id'])
         store_id = store_id['$oid']
         response2 = self.client.put(store_url + store_id + '/', data=json.dumps(self.data), headers=self.my_header)
@@ -656,7 +656,7 @@ class TestStore(BaseTestCase):
         }
         response1 = self.client.post(store_url, data=json.dumps(self.shop_zero), headers=self.my_header)
         self.assertEqual(response1.status, "201 CREATED")
-        store_id = json.loads(response1.data)
+        store_id = json.loads(response1.data.decode('utf-8'))
         store_id = json.loads(store_id['store_id'])
         store_id = store_id['$oid']
         response2 = self.client.put(store_url + store_id + '/', data=json.dumps(self.data), headers=self.my_header)
@@ -685,7 +685,7 @@ class TestStore(BaseTestCase):
         }
         response1 = self.client.post(store_url, data=json.dumps(self.shop_zero), headers=self.my_header)
         self.assertEqual(response1.status, "201 CREATED")
-        store_id = json.loads(response1.data)
+        store_id = json.loads(response1.data.decode('utf-8'))
         store_id = json.loads(store_id['store_id'])
         store_id = store_id['$oid']
         response2 = self.client.put(store_url + store_id + '/', data=json.dumps(self.data), headers=self.my_header)
@@ -714,7 +714,7 @@ class TestStore(BaseTestCase):
         }
         response1 = self.client.post(store_url, data=json.dumps(self.shop_zero), headers=self.my_header)
         self.assertEqual(response1.status, "201 CREATED")
-        store_id = json.loads(response1.data)
+        store_id = json.loads(response1.data.decode('utf-8'))
         store_id = json.loads(store_id['store_id'])
         store_id = store_id['$oid']
         response2 = self.client.put(store_url + store_id + '/', data=json.dumps(self.data), headers=self.my_header)
@@ -730,7 +730,7 @@ class TestStore(BaseTestCase):
         """
         response1 = self.client.post(store_url, data=json.dumps(self.shop_zero), headers=self.my_header)
         self.assertEqual(response1.status, "201 CREATED")
-        store_id = json.loads(response1.data)
+        store_id = json.loads(response1.data.decode('utf-8'))
         store_id = json.loads(store_id['store_id'])
         store_id = store_id['$oid']
         response2 = self.client.delete(store_url + store_id + '/', headers=self.my_header)
