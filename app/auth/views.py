@@ -1,10 +1,19 @@
 import re
-from flask import Flask, Blueprint
 from flask_restful import Resource, Api, reqparse
+from flask_bcrypt import generate_password_hash
 from . import auth_blueprint
 from ..models import User
 
 api_auth = Api(auth_blueprint)
+
+def hash_password(password):
+    """
+    Hashes password using B-crypt
+    :param password:
+    :return:
+    """
+    password = generate_password_hash(password)
+    return password
 
 
 class Registration(Resource):
@@ -26,15 +35,15 @@ class Registration(Resource):
         args = self.parser.parse_args()
 
         # confirm first name value exists and is valid format
-        firstname = args['first_name']
-        if not firstname:
+        first_name = args['first_name']
+        if not first_name:
             response = {
                 'message': 'Error. Missing First Name'
                 }
 
             return response, 400
-        check_firstname = re.match('^[a-zA-Z]+$', firstname)
-        if check_firstname is None:
+        check_first_name = re.match('^[a-zA-Z]+$', first_name)
+        if check_first_name is None:
             response = {
                 'message': 'Error. First Name Has Invalid Characters'
             }
@@ -42,21 +51,21 @@ class Registration(Resource):
             return response, 400
 
         # confirm last name value exists and is valid format
-        lastname = args['last_name']
-        if not lastname:
+        last_name = args['last_name']
+        if not last_name:
             response = {
                 'message': 'Error. Missing Last Name'
             }
 
             return response, 400
 
-        check_lastname = re.match('^[a-zA-Z]+$', lastname)
-        if check_lastname is None:
+        check_last_name = re.match('^[a-zA-Z]+$', last_name)
+        if check_last_name is None:
             response = {
                 'message': 'Error. Last Name Has Invalid Characters'
             }
             # return a response notifying the user that credentials username is invalid
-            return (response, 400)
+            return response, 400
 
         # confirm username name value exists and is valid format
         username = args['username']
@@ -102,20 +111,27 @@ class Registration(Resource):
             return response, 400
 
         # Query to see if the username or email already exists
-        username = User.query.filter_by(username=args["username"]).first()
-        email = User.query.filter_by(email=args["email"]).first()
+        try:
+            username = User.objects.get(username=args["username"])
+        except User.DoesNotExist:
+            username = None
+
+        try:
+            email = User.objects.get(email=args["email"])
+        except User.DoesNotExist:
+            email = None
 
         if not username and not email:
             # this means there doesn't exist a user with the same username and email
             # proceed to register them
             try:
                 user = User(
-                    first_name=args['first_name'],
-                    last_name=args['last_name'],
-                    username=args['username'],
-                    email=args['email'],
-                    password=args['password'])
-
+                    first_name=args["first_name"],
+                    last_name=args["last_name"],
+                    username=args["username"],
+                    email=args["email"],
+                    password = hash_password(args['password'])
+                )
                 user.save()
 
                 response = {
@@ -124,7 +140,7 @@ class Registration(Resource):
 
                 return response, 201
             except Exception as e:
-                # An error has occured, therefore return a string message containing the error
+                # An error has occurred, therefore return a string message containing the error
                 response = {
                     'status': 'error',
                     'message': str(e)
@@ -188,13 +204,17 @@ class Login(Resource):
             return response, 400
 
         try:
-            user = User.query.filter_by(email=args["email"]).first()
+            user = User.objects.get(email=args["email"])
 
-            if user and user.password_is_valid(password=args["password"]):
+        except User.DoesNotExist:
+            user = None
+
+        try:
+            if user and user.password_is_valid(args["password"]):
                 access_token = user.generate_auth_token()
                 if access_token:
                     response = {
-                        'message': 'You have succesfully logged in. Welcome',
+                        'message': 'You have successfully logged in. Welcome',
                         'access_token': access_token.decode()
                     }
                     return response, 200

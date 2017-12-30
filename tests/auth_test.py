@@ -41,7 +41,7 @@ class TestAuthentication(BaseTestCase):
             "password" : "password1234"
         }
 
-        # make a post request and recieve a failure response
+        # make a post request and receive a failure response
         response = self.client.post(register_url, data=json.dumps(self.data), headers={"Content-Type":"application/json"})
         self.assertEqual(response.status, "400 BAD REQUEST")
         self.assertIn("Error. Missing First Name", str(response.data))
@@ -59,7 +59,7 @@ class TestAuthentication(BaseTestCase):
             "password" : "password1234"
         }
 
-        # make a post request and recieve a failure response
+        # make a post request and receive a failure response
         response = self.client.post(register_url, data=json.dumps(self.data), headers={"Content-Type":"application/json"}) 
         self.assertEqual(response.status, "400 BAD REQUEST")
         self.assertIn("Error. Missing Last Name", str(response.data))
@@ -78,7 +78,7 @@ class TestAuthentication(BaseTestCase):
             "password" : "password1234"
         }
 
-        # make a post request and recieve a failure response
+        # make a post request and receive a failure response
         response = self.client.post(register_url, data=json.dumps(self.data), headers={"Content-Type":"application/json"})
         self.assertEqual(response.status, "400 BAD REQUEST")
         self.assertIn("Error. Missing Username", str(response.data))
@@ -97,7 +97,7 @@ class TestAuthentication(BaseTestCase):
             "password" : "password1234"
         }
 
-        # make a post request and recieve a failure response
+        # make a post request and receive a failure response
         response = self.client.post(register_url, data=json.dumps(self.data), headers={"Content-Type":"application/json"})
         self.assertEqual(response.status, "400 BAD REQUEST")
         self.assertIn("Error. Missing Email", str(response.data))
@@ -116,7 +116,7 @@ class TestAuthentication(BaseTestCase):
             "password" : ""
         }
 
-        # make a post request and recieve a failure response
+        # make a post request and receive a failure response
         response = self.client.post(register_url, data=json.dumps(self.data), headers={"Content-Type":"application/json"})
         self.assertEqual(response.status, "400 BAD REQUEST")
         self.assertIn("Error. Missing Password", str(response.data))
@@ -138,11 +138,10 @@ class TestAuthentication(BaseTestCase):
             "password" : "password1234"
         }
 
-        # make a post request and recieve a failure response
+        # make a post request and receive a failure response
         response = self.client.post(register_url, data=json.dumps(self.data), headers={"Content-Type": "application/json"})
         self.assertEqual(response.status, "409 CONFLICT")
         self.assertIn("Error. Username Already Exists", str(response.data))
-
 
     def test_registration_using_duplicate_email(self):
         """
@@ -153,7 +152,7 @@ class TestAuthentication(BaseTestCase):
         # create initial user
         response = self.client.post(register_url, data=json.dumps(self.user_zero), headers={"Content-Type":"application/json"})
 
-        #create new user with duplicate email
+        # create new user with duplicate email
         self.data = {
             "first_name" : "Paul",
             "last_name" : "Pogba",
@@ -162,7 +161,7 @@ class TestAuthentication(BaseTestCase):
             "password" : "password1234"
         }
 
-        # make a post request and recieve a failure response
+        # make a post request and receive a failure response
         response = self.client.post(register_url, data=json.dumps(self.data), headers={"Content-Type":"application/json"})
         self.assertEqual(response.status, "409 CONFLICT")
         self.assertIn("Error. Email Address Already Exists", str(response.data))
@@ -181,7 +180,7 @@ class TestAuthentication(BaseTestCase):
             "password" : "password1234"
         }
 
-        # make a post request and recieve a failure response
+        # make a post request and receive a failure response
         response = self.client.post(register_url, data=json.dumps(self.data), headers={"Content-Type":"application/json"})
         self.assertEqual(response.status, "400 BAD REQUEST")
         self.assertIn("Error. First Name Has Invalid Characters", str(response.data))
@@ -200,7 +199,7 @@ class TestAuthentication(BaseTestCase):
             "password" : "password1234"
         }
 
-        # make a post request and recieve a failure response
+        # make a post request and receive a failure response
         response = self.client.post(register_url, data=json.dumps(self.data), headers={"Content-Type":"application/json"})
         self.assertEqual(response.status, "400 BAD REQUEST")
         self.assertIn("Error. Last Name Has Invalid Characters", str(response.data))
@@ -219,7 +218,7 @@ class TestAuthentication(BaseTestCase):
             "password" : "password1234"
         }
 
-        # make a post request and recieve a failure response
+        # make a post request and receive a failure response
         response = self.client.post(register_url, data=json.dumps(self.data), headers={"Content-Type":"application/json"})
         self.assertEqual(response.status, "400 BAD REQUEST")
         self.assertIn("Error. Username Has Invalid Characters", str(response.data))
@@ -238,30 +237,29 @@ class TestAuthentication(BaseTestCase):
             "password" : "password1234"
         }
 
-        # make a post request and recieve a failure response
+        # make a post request and receive a failure response
         response = self.client.post(register_url, data=json.dumps(self.data), headers={"Content-Type":"application/json"})
         self.assertEqual(response.status, "400 BAD REQUEST")
         self.assertIn("Error. Invalid Email Format", str(response.data))
 
-    def test_succesfull_user_login(self):
+    def test_successful_user_login(self):
         """
-        succesfully logs in user to system
+        successfully logs in user to system
         (POST Request)
         """
 
         # create initial user
         response = self.client.post(register_url, data=json.dumps(self.user_zero), headers={"Content-Type":"application/json"})
 
-        #log in using user credentials
+        # log in using user credentials
         self.data = {
             "email" : "kdot@gmail.com",
             "password" : "password1234"
         }
-
-         # make a post request and recieve a success response
+        # make a post request and receive a success response
         response = self.client.post(login_url, data=json.dumps(self.data), headers={"Content-Type":"application/json"})
         # self.assertEqual(response.status, 200)
-        self.assertIn("You have succesfully logged in. Welcome", str(response.data))
+        self.assertIn("You have successfully logged in. Welcome", str(response.data))
 
     def test_user_login_with_missing_email(self):
         """
@@ -272,13 +270,13 @@ class TestAuthentication(BaseTestCase):
         # create initial user
         response = self.client.post(register_url, data=json.dumps(self.user_zero), headers={"Content-Type":"application/json"})
 
-        #log in using user credentials
+        # log in using user credentials
         self.data = {
             "email" : "",
             "password" : "password1234"
         }
 
-         # make a post request and recieve a Failure response
+        # make a post request and receive a Failure response
         response = self.client.post(login_url, data=json.dumps(self.data), headers={"Content-Type":"application/json"})
         self.assertEqual(response.status, "400 BAD REQUEST")
         self.assertIn("Error: Missing Valid Email Address", str(response.data))
@@ -292,19 +290,18 @@ class TestAuthentication(BaseTestCase):
         # create initial user
         response = self.client.post(register_url, data=json.dumps(self.user_zero), headers={"Content-Type":"application/json"})
 
-        #log in using user credentials
+        # log in using user credentials
         self.data = {
             "email" : "kdot@gmail.com",
             "password" : ""
         }
 
-         # make a post request and recieve a Failure response
+        # make a post request and receive a Failure response
         response = self.client.post(login_url, data=json.dumps(self.data), headers={"Content-Type":"application/json"})
         self.assertEqual(response.status, "400 BAD REQUEST")
         self.assertIn("Error: Missing Password", str(response.data))
 
-
-    def test_user_login_with_wrong_or_nonexisting_email(self):
+    def test_user_login_with_wrong_or_non_existing_email(self):
         """
         fails to log in user with wrong email
         (POST Request)
@@ -313,18 +310,18 @@ class TestAuthentication(BaseTestCase):
         # create initial user
         response = self.client.post(register_url, data=json.dumps(self.user_zero), headers={"Content-Type":"application/json"})
 
-        #log in using user credentials
+        # log in using user credentials
         self.data = {
             "email" : "kilodot@gmail.com",
             "password" : "password"
         }
 
-         # make a post request and recieve a Failure response
+        # make a post request and receive a Failure response
         response = self.client.post(login_url, data=json.dumps(self.data), headers={"Content-Type":"application/json"})
         self.assertEqual(response.status, "400 BAD REQUEST")
         self.assertIn("Error: Invalid Email or Password", str(response.data))
 
-    def test_user_login_with_wrong_or_nonexisting_password(self):
+    def test_user_login_with_wrong_or_non_existing_password(self):
         """
         fails to log in user with wrong password
         (POST Request)
@@ -333,13 +330,13 @@ class TestAuthentication(BaseTestCase):
         # create initial user
         response = self.client.post(register_url, data=json.dumps(self.user_zero), headers={"Content-Type":"application/json"})
 
-        #log in using user credentials
+        # log in using user credentials
         self.data = {
             "email" : "kdot@gmail.com",
             "password" : "password"
         }
 
-         # make a post request and recieve a Failure response
+        # make a post request and receive a Failure response
         response = self.client.post(login_url, data=json.dumps(self.data), headers={"Content-Type":"application/json"})
         self.assertEqual(response.status, "400 BAD REQUEST")
         self.assertIn("Error: Invalid Email or Password", str(response.data))
@@ -351,13 +348,13 @@ class TestAuthentication(BaseTestCase):
         # create initial user
         response = self.client.post(register_url, data=json.dumps(self.user_zero), headers={"Content-Type":"application/json"})
 
-        #log in using user credentials
+        # log in using user credentials
         self.data = {
             "email" : "kdot@gmail.",
             "password" : "password"
         }
 
-         # make a post request and recieve a Failure response
+        # make a post request and receive a Failure response
         response = self.client.post(login_url, data=json.dumps(self.data), headers={"Content-Type":"application/json"})
         self.assertEqual(response.status, "400 BAD REQUEST")
         self.assertIn("Error. Invalid Email Format", str(response.data))
